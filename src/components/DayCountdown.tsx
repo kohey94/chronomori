@@ -22,7 +22,7 @@ export default function DayCountdown() {
     <Box p={6} borderWidth="1px" rounded="2xl" bg="blackAlpha.300">
       <HStack justify="space-between" align="center" mb={1}>
         <Text fontSize="sm" color="gray.400">
-          今日の残り
+          本日の残された時間
         </Text>
       </HStack>
 
