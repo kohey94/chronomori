@@ -11,12 +11,9 @@ import {
   NumberInput,
   NumberInputField,
   Stack,
-  Text,
-  Tabs,
-  TabList,
-  Tab,
 } from "@chakra-ui/react";
 import { useSettings } from "../context/SettingsContext";
+import SegmentedTabs from "./SegmentedTabs";
 
 type Props = {
   isOpen: boolean;
@@ -24,8 +21,16 @@ type Props = {
 };
 
 export default function SettingsDrawer({ isOpen, onClose }: Props) {
-  const { displayMode, setDisplayMode, birthStr, setBirthStr, avgYears, setAvgYears } =
-    useSettings();
+  const {
+    displayMode,
+    setDisplayMode,
+    birthStr,
+    setBirthStr,
+    avgYears,
+    setAvgYears,
+    gender,
+    setGender,
+  } = useSettings();
 
   return (
     <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="sm">
@@ -35,29 +40,7 @@ export default function SettingsDrawer({ isOpen, onClose }: Props) {
         <DrawerHeader>Settings</DrawerHeader>
         <DrawerBody>
           <Stack spacing={5}>
-            <Text color="whiteAlpha.700" fontSize="sm">
-              Chronomori is a clock that contemplates death.
-            </Text>
-
-            {/* 表示モード */}
-            <FormControl>
-              <FormLabel fontSize="sm" color="whiteAlpha.800">
-                表示モード
-              </FormLabel>
-              <Tabs
-                index={displayMode === "hms" ? 0 : 1}
-                onChange={(i) => setDisplayMode(i === 0 ? "hms" : "sec")}
-                variant="soft-rounded"
-                colorScheme="whiteAlpha"
-                size="sm"
-              >
-                <TabList bg="whiteAlpha.200" p="2px" rounded="full" w="fit-content">
-                  <Tab _selected={{ bg: "whiteAlpha.700", color: "black" }}>hms</Tab>
-                  <Tab _selected={{ bg: "whiteAlpha.700", color: "black" }}>sec</Tab>
-                </TabList>
-              </Tabs>
-            </FormControl>
-
+            {/* 生年月日 */}
             <FormControl>
               <FormLabel fontSize="sm" color="whiteAlpha.800">
                 生年月日
@@ -68,6 +51,22 @@ export default function SettingsDrawer({ isOpen, onClose }: Props) {
                 onChange={(e) => setBirthStr(e.target.value)}
                 bg="blackAlpha.400"
                 borderColor="whiteAlpha.300"
+              />
+            </FormControl>
+
+            {/* 性別 */}
+            <FormControl>
+              <FormLabel fontSize="sm" color="whiteAlpha.800">
+                性別
+              </FormLabel>
+              <SegmentedTabs
+                ariaLabel="性別の選択"
+                value={gender}
+                onChange={(v) => setGender(v as "male" | "female")}
+                options={[
+                  { value: "male", label: "男" },
+                  { value: "female", label: "女" },
+                ]}
               />
             </FormControl>
 
@@ -83,6 +82,22 @@ export default function SettingsDrawer({ isOpen, onClose }: Props) {
               >
                 <NumberInputField bg="blackAlpha.400" borderColor="whiteAlpha.300" />
               </NumberInput>
+            </FormControl>
+
+            {/* 表示モード */}
+            <FormControl>
+              <FormLabel fontSize="sm" color="whiteAlpha.800">
+                表示モード
+              </FormLabel>
+              <SegmentedTabs
+                ariaLabel="表示モードの切り替え"
+                value={displayMode}
+                onChange={(v) => setDisplayMode(v as "hms" | "sec")}
+                options={[
+                  { value: "hms", label: "hms" },
+                  { value: "sec", label: "sec" },
+                ]}
+              />
             </FormControl>
           </Stack>
         </DrawerBody>
