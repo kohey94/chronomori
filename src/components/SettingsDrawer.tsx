@@ -8,8 +8,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  NumberInput,
-  NumberInputField,
   Stack,
 } from "@chakra-ui/react";
 import { useSettings } from "../context/SettingsContext";
@@ -68,20 +66,6 @@ export default function SettingsDrawer({ isOpen, onClose }: Props) {
                   { value: "female", label: "女" },
                 ]}
               />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel fontSize="sm" color="whiteAlpha.800">
-                平均寿命（年）
-              </FormLabel>
-              <NumberInput
-                value={avgYears}
-                min={1}
-                max={130}
-                onChange={(_, n) => setAvgYears(Number.isFinite(n) ? n : avgYears)}
-              >
-                <NumberInputField bg="blackAlpha.400" borderColor="whiteAlpha.300" />
-              </NumberInput>
             </FormControl>
 
             {/* 表示モード */}
