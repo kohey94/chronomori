@@ -31,14 +31,6 @@ export default function DayCountdown() {
       ) : (
         <DaySeconds remainingSec={remainingSec} alpha={alpha} />
       )}
-
-      <Progress
-        value={progress}
-        height="10px"
-        mt={4}
-        bg="whiteAlpha.200"
-        sx={{ "& > div": { backgroundColor: `rgba(255,255,255,${Math.max(0.22, alpha)})` } }}
-      />
     </Box>
   );
 }
