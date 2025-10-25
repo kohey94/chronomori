@@ -3,7 +3,6 @@ import {
   Heading,
   HStack,
   IconButton,
-  Text,
   useDisclosure,
   Image,
   useBreakpointValue,
