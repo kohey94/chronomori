@@ -8,13 +8,7 @@ type Props = {
 
 export default function DayHMS({ remainingMs, alpha }: Props) {
   return (
-    <Text
-      fontSize="6xl"
-      fontWeight="semibold"
-      lineHeight="1"
-      mt={1}
-      color={`rgba(255,255,255,${alpha})`}
-    >
+    <Text fontSize="6xl" fontWeight="semibold" lineHeight="1" mt={1} color={`rgba(0,0,0,${alpha})`}>
       {formatHMS(remainingMs)}
     </Text>
   );

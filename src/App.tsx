@@ -8,8 +8,8 @@ export default function App() {
     <Container maxW="container.md" py={4}>
       <Header />
       <Stack spacing={6} mt={2}>
-        <DayCountdown />
         <LifeCountdown />
+        <DayCountdown />
       </Stack>
     </Container>
   );

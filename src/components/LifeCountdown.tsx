@@ -1,12 +1,12 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { useMemo } from "react";
-import { useTick } from "../hooks/useTick";
+import { useClock } from "../context/ClockContext";
 import { useSettings } from "../context/SettingsContext";
 import { useLifeTable } from "../hooks/useLifeTable";
 import { exactAgeYears, yomeiFromTable, yearsToDays } from "../utils/yomei";
 
 export default function LifeCountdown() {
-  const now = useTick(1000);
+  const { now } = useClock();
   const { birthStr, gender } = useSettings();
   const { male, female, ready } = useLifeTable();
 
@@ -28,46 +28,31 @@ export default function LifeCountdown() {
 
   if (!ready) {
     return (
-      <Box p={6} borderWidth="1px" rounded="2xl" bg="blackAlpha.300">
-        <Text color="whiteAlpha.800">生命表を読み込み中…</Text>
-      </Box>
+      <Text fontSize="lg" color="black" textAlign="center">
+        生命表を読み込み中…
+      </Text>
     );
   }
 
   if (!birthStr) {
     return (
-      <Box p={6} borderWidth="1px" rounded="2xl" bg="blackAlpha.300">
-        <Text fontSize="sm" color="gray.400">
-          残された時間
-        </Text>
-        <Text mt={3} color="whiteAlpha.800">
-          生年月日が未設定です。メニューから設定してください。
-        </Text>
-      </Box>
+      <Text fontSize="lg" color="black" textAlign="center">
+        生年月日が未設定です。メニューから設定してください。
+      </Text>
     );
   }
 
   if (yomeiYears == null) {
     return (
-      <Box p={6} borderWidth="1px" rounded="2xl" bg="blackAlpha.300">
-        <Text fontSize="sm" color="gray.400">
-          残された時間
-        </Text>
-        <Text mt={3} color="whiteAlpha.800">
-          余命データが見つかりませんでした。
-        </Text>
-      </Box>
+      <Text fontSize="lg" color="black" textAlign="center">
+        余命データが見つかりませんでした。
+      </Text>
     );
   }
 
   return (
-    <Box p={6} borderWidth="1px" rounded="2xl" bg="blackAlpha.300">
-      <Text fontSize="sm" color="gray.400">
-        残された時間
-      </Text>
-      <Text fontSize="4xl" fontWeight="semibold" color="whiteAlpha.900">
-        約 {yomeiYears.toFixed(2)} 年（約 {yearsToDays(yomeiYears).toFixed(1)} 日）
-      </Text>
-    </Box>
+    <Text fontSize="lg" color="black" textAlign="center">
+      あなたに残された時間: 約 {yomeiYears.toFixed(1)} 年（{yearsToDays(yomeiYears).toFixed(1)} 日）
+    </Text>
   );
 }

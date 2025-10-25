@@ -1,35 +1,72 @@
-import { Box, Text, HStack } from "@chakra-ui/react";
-import { useMemo } from "react";
-import { useTick } from "../hooks/useTick";
+import { Box, Text, HStack, VStack } from "@chakra-ui/react";
+import { useMemo, useRef } from "react";
 import { SECONDS_PER_DAY, diffMs, endOfToday } from "../utils/time";
 import DayHMS from "./DayHMS";
 import DaySeconds from "./DaySeconds";
 import { useSettings } from "../context/SettingsContext";
+import DripStage from "./DripStage";
+import { useClock } from "../context/ClockContext";
 
 export default function DayCountdown() {
-  const now = useTick(1000);
+  const { now } = useClock();
   const { displayMode } = useSettings();
+  const cardRef = useRef<HTMLDivElement | null>(null);
 
   const remainingMs = useMemo(() => diffMs(endOfToday(), now), [now]);
   const remainingSec = Math.floor(remainingMs / 1000);
 
-  // 残り比率（フェード/プログレスに使用）
-  const ratio = remainingSec / SECONDS_PER_DAY; // 0.0〜1.0
-  const alpha = Math.max(0.18, ratio); // 可読性のため下限を残す
+  // 残量（0〜100%）
+  const percent = Math.max(0, Math.min(100, (remainingSec / SECONDS_PER_DAY) * 100));
 
   return (
-    <Box p={6} borderWidth="1px" rounded="2xl" bg="blackAlpha.300">
-      <HStack justify="space-between" align="center" mb={1}>
-        <Text fontSize="sm" color="gray.400">
-          本日の残された時間
-        </Text>
-      </HStack>
+    <>
+      <Box
+        ref={cardRef}
+        position="relative"
+        overflow="hidden"
+        p={6}
+        borderWidth="2px"
+        borderColor="black"
+        rounded="2xl"
+        bg="white"
+        height="200px"
+      >
+        <Box
+          position="absolute"
+          bottom={0}
+          left={0}
+          right={0}
+          height={`${percent}%`}
+          bg="red.600"
+          transition="height 0.6s linear"
+          aria-hidden
+        />
 
-      {displayMode === "hms" ? (
-        <DayHMS remainingMs={remainingMs} alpha={alpha} />
-      ) : (
-        <DaySeconds remainingSec={remainingSec} alpha={alpha} />
-      )}
-    </Box>
+        <HStack justify="space-between" w="100%" px={6}>
+          <Text fontSize="m" color="black">
+            本日の残された時間
+          </Text>
+          <Text fontSize="m" color="black" fontWeight="medium">
+            {percent.toFixed(1)}%
+          </Text>
+        </HStack>
+        <VStack
+          position="relative"
+          zIndex={1}
+          justify="center"
+          align="center"
+          height="100%"
+          spacing={2}
+        >
+          {displayMode === "hms" ? (
+            <DayHMS remainingMs={remainingMs} alpha={1} />
+          ) : (
+            <DaySeconds remainingSec={remainingSec} alpha={1} />
+          )}
+        </VStack>
+      </Box>
+
+      <DripStage anchorRef={cardRef} />
+    </>
   );
 }

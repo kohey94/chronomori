@@ -62,7 +62,7 @@ export default function SettingsDrawer({ isOpen, onClose }: Props) {
             {/* 表示モード */}
             <FormControl>
               <FormLabel fontSize="sm" color="whiteAlpha.800">
-                表示モード
+                時間表示
               </FormLabel>
               <SegmentedTabs
                 ariaLabel="表示モードの切り替え"
