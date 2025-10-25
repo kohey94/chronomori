@@ -37,7 +37,7 @@ export default function LifeCountdown() {
   if (!birthStr) {
     return (
       <Text fontSize="lg" color="text" textAlign="center">
-        生年月日が未設定です。メニューから設定してください。
+        生年月日が未設定です。設定してください。
       </Text>
     );
   }
@@ -52,7 +52,7 @@ export default function LifeCountdown() {
 
   return (
     <Text fontSize="lg" color="text" textAlign="center">
-      あなたに残された時間: 約 {yomeiYears.toFixed(1)} 年（{yearsToDays(yomeiYears).toFixed(1)} 日）
+      残りの時間: 約 {yomeiYears.toFixed(1)} 年（{yearsToDays(yomeiYears).toFixed(1)} 日）
     </Text>
   );
 }
