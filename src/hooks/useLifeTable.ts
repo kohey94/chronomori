@@ -1,4 +1,3 @@
-import { TabIndicator } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 export type LifeRow = { age: number; yomei: number };
