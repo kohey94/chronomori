@@ -85,9 +85,8 @@ export default function DripStage({ anchorRef }: Props) {
               width: d.size,
               height: d.size,
               borderRadius: "50%",
-              background: "#E53E3E", // 滴の色：必要なら調整
+              background: "#E53E3E",
               willChange: "transform, opacity",
-              filter: "blur(0.2px)", // ごく軽い滲み（任意）
             }}
           />
         ))}

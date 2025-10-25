@@ -3,12 +3,11 @@ import { formatHMS } from "../utils/time";
 
 type Props = {
   remainingMs: number;
-  alpha: number;
 };
 
-export default function DayHMS({ remainingMs, alpha }: Props) {
+export default function DayHMS({ remainingMs }: Props) {
   return (
-    <Text fontSize="6xl" fontWeight="semibold" lineHeight="1" mt={1} color={`rgba(0,0,0,${alpha})`}>
+    <Text fontSize="6xl" fontWeight="semibold" lineHeight="1" mt={1} color="text">
       {formatHMS(remainingMs)}
     </Text>
   );

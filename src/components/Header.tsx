@@ -7,6 +7,7 @@ import {
   Image,
   useBreakpointValue,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import SettingsDrawer from "./SettingsDrawer";
@@ -15,11 +16,9 @@ import { useMemo } from "react";
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const logoSize = useBreakpointValue({ base: "24px", md: "32px" });
-
   const today = useToday();
-
+  const logoSrc = useColorModeValue("/chronomori_icon_light.png", "/chronomori_icon_dark.png");
   const formattedDate = useMemo(() => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const y = today.getFullYear();
@@ -34,21 +33,21 @@ export default function Header() {
       <HStack justify="space-between" align="start">
         <HStack spacing={3}>
           <Image
-            src="/chronomori_icon_light.png"
+            src={logoSrc}
             alt="Chronomori Logo"
             height={logoSize}
             width={logoSize}
             borderRadius="md"
           />
           <Box>
-            <Heading size="lg" color="black">
+            <Heading size="lg" color="text">
               Chronomori
             </Heading>
           </Box>
         </HStack>
 
         <HStack spacing={4}>
-          <Text fontSize="md" color="black">
+          <Text fontSize="md" color="text">
             {formattedDate}
           </Text>
           <IconButton
@@ -56,7 +55,7 @@ export default function Header() {
             icon={<HamburgerIcon />}
             variant="ghost"
             colorScheme="blackAlpha"
-            color="blackAlpha.900"
+            color="text"
             onClick={onOpen}
           />
         </HStack>

@@ -26,9 +26,9 @@ export default function DayCountdown() {
         overflow="hidden"
         p={6}
         borderWidth="2px"
-        borderColor="black"
+        borderColor="border"
         rounded="2xl"
-        bg="white"
+        bg="card"
         height="200px"
       >
         <Box
@@ -37,16 +37,16 @@ export default function DayCountdown() {
           left={0}
           right={0}
           height={`${percent}%`}
-          bg="red.600"
+          bg="gaugeFill"
           transition="height 0.6s linear"
           aria-hidden
         />
 
         <HStack justify="space-between" w="100%" px={6}>
-          <Text fontSize="m" color="black">
+          <Text fontSize="m" color="text">
             本日の残された時間
           </Text>
-          <Text fontSize="m" color="black" fontWeight="medium">
+          <Text fontSize="m" color="text" fontWeight="medium">
             {percent.toFixed(1)}%
           </Text>
         </HStack>
@@ -59,9 +59,9 @@ export default function DayCountdown() {
           spacing={2}
         >
           {displayMode === "hms" ? (
-            <DayHMS remainingMs={remainingMs} alpha={1} />
+            <DayHMS remainingMs={remainingMs} />
           ) : (
-            <DaySeconds remainingSec={remainingSec} alpha={1} />
+            <DaySeconds remainingSec={remainingSec} />
           )}
         </VStack>
       </Box>

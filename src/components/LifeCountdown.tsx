@@ -28,7 +28,7 @@ export default function LifeCountdown() {
 
   if (!ready) {
     return (
-      <Text fontSize="lg" color="black" textAlign="center">
+      <Text fontSize="lg" color="text" textAlign="center">
         生命表を読み込み中…
       </Text>
     );
@@ -36,7 +36,7 @@ export default function LifeCountdown() {
 
   if (!birthStr) {
     return (
-      <Text fontSize="lg" color="black" textAlign="center">
+      <Text fontSize="lg" color="text" textAlign="center">
         生年月日が未設定です。メニューから設定してください。
       </Text>
     );
@@ -44,14 +44,14 @@ export default function LifeCountdown() {
 
   if (yomeiYears == null) {
     return (
-      <Text fontSize="lg" color="black" textAlign="center">
+      <Text fontSize="lg" color="text" textAlign="center">
         余命データが見つかりませんでした。
       </Text>
     );
   }
 
   return (
-    <Text fontSize="lg" color="black" textAlign="center">
+    <Text fontSize="lg" color="text" textAlign="center">
       あなたに残された時間: 約 {yomeiYears.toFixed(1)} 年（{yearsToDays(yomeiYears).toFixed(1)} 日）
     </Text>
   );
