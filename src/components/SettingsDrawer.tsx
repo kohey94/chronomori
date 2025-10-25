@@ -19,16 +19,7 @@ type Props = {
 };
 
 export default function SettingsDrawer({ isOpen, onClose }: Props) {
-  const {
-    displayMode,
-    setDisplayMode,
-    birthStr,
-    setBirthStr,
-    avgYears,
-    setAvgYears,
-    gender,
-    setGender,
-  } = useSettings();
+  const { displayMode, setDisplayMode, birthStr, setBirthStr, gender, setGender } = useSettings();
 
   return (
     <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="sm">
