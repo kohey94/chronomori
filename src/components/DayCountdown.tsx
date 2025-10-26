@@ -43,10 +43,10 @@ export default function DayCountdown() {
         />
 
         <HStack justify="space-between" w="100%" px={6}>
-          <Text fontSize="m" color="text">
+          <Text fontSize="m" color="text" zIndex={1}>
             本日の残りの時間
           </Text>
-          <Text fontSize="m" color="text" fontWeight="medium">
+          <Text fontSize="m" color="text" fontWeight="medium" zIndex={1}>
             {percent.toFixed(1)}%
           </Text>
         </HStack>
